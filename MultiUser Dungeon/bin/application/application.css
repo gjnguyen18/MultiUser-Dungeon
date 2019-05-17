@@ -1,0 +1,51 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+#background {
+	-fx-background-color: darkred;
+}
+
+#titleText {
+	-fx-font-size: 60;
+	-fx-text-fill: white;
+}
+
+#titleButton { 
+	-fx-font-size: 30;
+   	-fx-background-color: black; 
+   	-fx-text-fill: white; 
+   	-fx-background-radius: 0
+}
+
+.button { 
+	-fx-font-size: 16;
+   	-fx-background-color: black; 
+   	-fx-text-fill: white; 
+   	-fx-background-radius: 0
+}
+
+.label {
+	-fx-font-size: 18;
+	-fx-text-fill: white;
+}
+
+#consoleText {
+	-fx-font-size: 12;
+	-fx-text-fill: white;
+}
+
+.scroll-pane {
+	-fx-background-color: black;
+}
+
+.scroll-pane > .viewport {
+	-fx-background-color: transparent;
+}
+
+.VBox {
+	-fx-background-color:black;
+}
+
+.text-field {
+	-fx-background-color: black;
+	-fx-text-fill: white;
+}
