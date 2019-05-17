@@ -35,7 +35,7 @@ public class GameScreen extends Screen{
 		this.hide();
 	}
 
-	public void setupGUI() {
+	private void setupGUI() {
 		// sets up textfield console
 		console = new TextField();
 		console.setPrefWidth(600);
@@ -121,6 +121,11 @@ public class GameScreen extends Screen{
 	public void exit() {
 		this.hide();
 		homeScreen.show();
+	}
+	
+	public void resetConsole() {
+		allTexts.getChildren().clear();
+		allTexts.getChildren().add(new Label(""));
 	}
 	
 	public void addMessage(String msg) {

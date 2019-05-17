@@ -1,6 +1,5 @@
 package application;
 
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.control.Alert;
@@ -16,7 +15,7 @@ import javafx.scene.layout.Region;
 public class SetupScreen extends Screen{
 	
 	private Screen homeScreen;
-	private Screen gameScreen;
+	private GameScreen gameScreen;
 	
 	private Label title;
 	private TextField linkField, nameField;
@@ -24,7 +23,7 @@ public class SetupScreen extends Screen{
 	
 	private Client client;
 
-	public SetupScreen(Group root, Client client, Screen back, Screen game) {
+	public SetupScreen(Group root, Client client, Screen back, GameScreen game) {
 		super(root);
 		this.client = client;
 		this.homeScreen = back;
@@ -49,6 +48,7 @@ public class SetupScreen extends Screen{
         	if(setupClient()) {
     				hide();
     				gameScreen.show();
+    				gameScreen.resetConsole();
     			}
         }
 	    }
@@ -64,6 +64,7 @@ public class SetupScreen extends Screen{
         	if(setupClient()) {
     				hide();
     				gameScreen.show();
+    				gameScreen.resetConsole();
     			}
         }
 	    }
@@ -76,6 +77,7 @@ public class SetupScreen extends Screen{
 			if(setupClient()) {
 				hide();
 				gameScreen.show();
+				gameScreen.resetConsole();
 			}
 		});
 		// sets up start button
