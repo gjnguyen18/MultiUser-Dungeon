@@ -145,6 +145,15 @@ public class Client {
 			gameScreen.setUp(Boolean.parseBoolean(instruction[10]));
 			gameScreen.setDown(Boolean.parseBoolean(instruction[11]));
 			break;
+		case "/take":
+			switch(instruction[3]) {
+			case "gold":
+				int amount = Integer.parseInt(instruction[4]);
+				gameScreen.incrementGold(amount);
+				gameScreen.addMessage("You got "+amount+" gold!");
+				break;
+			}
+			break;
 		default:
 			break;
 		}

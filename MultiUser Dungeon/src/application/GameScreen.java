@@ -22,10 +22,12 @@ public class GameScreen extends Screen{
 	private TextField roomLinkField;
 	private String roomLink;
 	private ScrollPane scrollPane;
-	private Label userCoords;
+	private Label userCoords, userGold;
 	private Button north,south,east,west,up,down;
 	private Button exitButton;
 	private Screen homeScreen;
+	
+	private int gold;
 
 	/**
 	 * Sets up gui elements and client
@@ -76,6 +78,9 @@ public class GameScreen extends Screen{
 		// sets up user coordinates label
 		userCoords = new Label("Coordinates: x=0 y=0 z=0");
 		Driver.addCenterNode(userCoords, this, 520, 50, 270, 40);
+		// sets up user coordinates label
+		userGold= new Label("Your Gold: 0g");
+		Driver.addCenterNode(userGold, this, 520, 80, 270, 40);
 		// sets up exit button
 		exitButton = new Button("Exit");
 		exitButton.setPrefSize(200, 50);
@@ -187,6 +192,20 @@ public class GameScreen extends Screen{
       public void run() {
       	roomLinkField.setText("Room Link: " + str);
     		roomLink = str;
+      }
+    });
+	}
+	
+	/**
+	 * Increments the user's gold
+	 * @param amount - amount to increment
+	 */
+	public void incrementGold(int amount) {
+		Platform.runLater(new Runnable() {
+      @Override
+      public void run() {
+      	gold+=amount;
+    		userGold.setText("Gold: "+gold+"g");
       }
     });
 	}

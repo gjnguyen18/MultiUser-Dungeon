@@ -99,4 +99,23 @@ public class GameWorld {
 	public boolean isSolid(String coords) {
 		return rooms.get(coords).isSolid();
 	}
+	
+	/**
+	 * Takes gold from room
+	 * @param amount - amount to take
+	 * @parm coords - coordinates of room
+	 * @return amount taken
+	 */
+	public int takeGold(int amount, String coords) {
+		Room room = rooms.get(coords);
+		return room.takeGold(amount);
+	}
+	
+	/**
+	 * @param coords - coordinates of room
+	 * @return gold in room
+	 */
+	public int goldAmount(String coords) {
+		return rooms.get(coords).goldAmount();
+	}
 }

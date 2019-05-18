@@ -6,13 +6,6 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.SocketException;
 
-import javafx.application.Platform;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.Region;
-
 /**
  * This class represents the reciever thread which recieves data from the server
  * Runs on the side to continuously recieve data

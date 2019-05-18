@@ -125,4 +125,20 @@ public class UsersDatabase {
 	public int size() {
 		return idToUsers.size();
 	}
+	
+	/**
+	 * @param id - id of user
+	 * @return true if user exists
+	 */
+	public boolean userExists(int id) {
+		return idToUsers.containsKey(id);
+	}
+	
+	/**
+	 * @param name - name of user
+	 * @return true if user exists
+	 */
+	public boolean userExists(String name) {
+		return nameToUsers.containsKey(name);
+	}
 }

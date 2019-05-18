@@ -114,20 +114,74 @@ public class Server extends Thread {
 			for(int i=4;i<instruction.length;i++) {
 				message+=" " + instruction[i];
 			}
-			sendToUser(message,id); // only sends instruction to receiver
-			sendToUser(str,database.getIDOfName(instruction[3]));
+			if(!database.userExists(instruction[3])) {
+				sendToUser("fill fill /noPretext [GAME] user "+ instruction[3]+" could not be found",id);
+			}
+			else if(instruction.length<5) {
+				sendToUser("fill fill /noPretext [GAME] /tell format: /tell <user> <message>",id);
+			}
+			else {
+				sendToUser(str,database.getIDOfName(instruction[3]));
+				sendToUser(message,id); // only sends instruction to receiver
+			}
 			break;
 		case "/say": // tells everyone a room a message
-			sendToRoom(str,id);
+			if(instruction.length<4)
+				sendToUser("fill fill /noPretext [GAME] /say format: /say <message>",id);
+			else
+				sendToRoom(str,id);
 			break;
 		case "/move": // moves player
 			moveUser(id,instruction[3]);
+			break;
+		case "/take":
+			if(instruction.length<5)
+				sendToUser("fill fill /noPretext [GAME] /take format: /take <item> <amount>",id);
+			else {
+				try {
+					take(id,instruction[3],Integer.parseInt(instruction[4]));
+				} catch(NumberFormatException e) {
+					sendToUser("fill fill /noPretext [GAME] /take format: /take <item> <amount>",id);
+				}
+			}
+			break;
+		case "/showItems":
+			if(instruction.length>3)
+				sendToUser("fill fill /noPretext [GAME] /showItemsInRoom format: /showItemsInRoom <no-args>",id);
+			else
+				showItemsInRoom(id);
 			break;
 		default:
 			for(int i:clientThreads.keySet()) {
 				clientThreads.get(i).sendToClient(str);
 			}
 			break;
+		}
+	}
+	
+	/**
+	 * Show the items in a room (currently only gold)
+	 * @param id - id of user
+	 */
+	private void showItemsInRoom(int id) {
+		int amount = world.goldAmount(database.getCoordsOfUserID(id));
+		sendToUser("fill fill /noPretext [GAME] there is: "+amount+" gold in this room",id);
+	}
+	
+	/**
+	 * Takes item from dungeon room and updates client
+	 * @param id - id of user
+	 * @param item - item to take
+	 * @param amount - amount of item to take
+	 */
+	private void take(int id, String item, int amount) {
+		switch(item) {
+		case "gold":
+			int goldTaken = world.takeGold(amount, database.getCoordsOfUserID(id));
+			sendToUser("fill fill /take gold " + goldTaken,id);
+			break;
+		default:
+			sendToUser("fill fill /noPretext [GAME] <" + item + "> cannot be found in this room",id);
 		}
 	}
 	
