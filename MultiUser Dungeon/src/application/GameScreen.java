@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 
 public class GameScreen extends Screen{
 	
+	// all of these are gui elements
 	private TextField console;
 	private VBox allTexts;
 	private Client client;
@@ -26,6 +27,12 @@ public class GameScreen extends Screen{
 	private Button exitButton;
 	private Screen homeScreen;
 
+	/**
+	 * Sets up gui elements and client
+	 * @param root - where gui is displayed from
+	 * @param client
+	 * @param home - home screen
+	 */
 	public GameScreen(Group root, Client client, Screen home) {
 		super(root);
 		this.client = client;
@@ -35,6 +42,9 @@ public class GameScreen extends Screen{
 		this.hide();
 	}
 
+	/**
+	 * Sets up all the gui elements
+	 */
 	private void setupGUI() {
 		// sets up textfield console
 		console = new TextField();
@@ -59,14 +69,14 @@ public class GameScreen extends Screen{
 		scrollPane.setLayoutY(10);
 		scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		addElement(scrollPane);
-		
+		// sets up room link field
 		roomLinkField = new TextField("RoomLink");
 		roomLinkField.setDisable(true);
 		Driver.addCenterNode(roomLinkField, this, 520, 10, 270, 40);
-		
+		// sets up user coordinates label
 		userCoords = new Label("Coordinates: x=0 y=0 z=0");
 		Driver.addCenterNode(userCoords, this, 520, 50, 270, 40);
-		
+		// sets up exit button
 		exitButton = new Button("Exit");
 		exitButton.setPrefSize(200, 50);
 		Driver.addCenterNode(exitButton, this, 560, 460, 200, 50);
@@ -74,42 +84,42 @@ public class GameScreen extends Screen{
 			client.disconnect(false);
 			exit();
 		});
-		
+		// sets up move north button
 		north = new Button("north");
 		north.setPrefSize(80, 40);
 		Driver.addCenterNode(north, this, 620, 160, 80, 40);
 		north.setOnAction(e -> {
 			client.sendMessage("/move north");
 		});
-		
+		// sets up move south button
 		south = new Button("south");
 		south.setPrefSize(80, 40);
 		Driver.addCenterNode(south, this, 620, 260, 80, 40);
 		south.setOnAction(e -> {
 			client.sendMessage("/move south");
 		});
-		
+		// sets up move east button
 		east = new Button("east");
 		east.setPrefSize(80, 40);
 		Driver.addCenterNode(east, this, 710, 210, 80, 40);
 		east.setOnAction(e -> {
 			client.sendMessage("/move east");
 		});
-		
+		// sets up move west button
 		west = new Button("west");
 		west.setPrefSize(80, 40);
 		Driver.addCenterNode(west, this, 530, 210, 80, 40);
 		west.setOnAction(e -> {
 			client.sendMessage("/move west");
 		});
-		
+		// sets up move up button
 		up = new Button("up");
 		up.setPrefSize(80, 40);
 		Driver.addCenterNode(up, this, 620, 330, 80, 40);
 		up.setOnAction(e -> {
 			client.sendMessage("/move up");
 		});
-		
+		// sets up move down button
 		down = new Button("down");
 		down.setPrefSize(80, 40);
 		Driver.addCenterNode(down, this, 620, 380, 80, 40);
@@ -118,16 +128,26 @@ public class GameScreen extends Screen{
 		});
 	}
 	
+	/**
+	 * Exits to home screen
+	 */
 	public void exit() {
 		this.hide();
 		homeScreen.show();
 	}
 	
+	/**
+	 * Clears the console of previous text
+	 */
 	public void resetConsole() {
 		allTexts.getChildren().clear();
 		allTexts.getChildren().add(new Label(""));
 	}
 	
+	/**
+	 * Adds a message to the buttom of the console
+	 * @param msg - message to be added
+	 */
 	public void addMessage(String msg) {
 		Platform.runLater(new Runnable() {
       @Override
@@ -142,6 +162,12 @@ public class GameScreen extends Screen{
     });
 	}
 	
+	/**
+	 * Sets the coordinates label
+	 * @param x
+	 * @param y
+	 * @param z
+	 */
 	public void setCoords(String x, String y, String z) {
 		Platform.runLater(new Runnable() {
       @Override
@@ -151,6 +177,10 @@ public class GameScreen extends Screen{
     });
 	}
 	
+	/**
+	 * Sets up the room link on the top right
+	 * @param str - room link
+	 */
 	public void setupRoomLinkLabel(String str) {
 		Platform.runLater(new Runnable() {
       @Override
@@ -161,6 +191,10 @@ public class GameScreen extends Screen{
     });
 	}
 	
+	/**
+	 * Disables/Enables moving north
+	 * @param b - whether or not direction is valid
+	 */
 	public void setNorth(boolean b) {
 		Platform.runLater(new Runnable() {
       @Override
@@ -170,6 +204,10 @@ public class GameScreen extends Screen{
     });
 	}
 	
+	/**
+	 * Disables/Enables moving south
+	 * @param b - whether or not direction is valid
+	 */
 	public void setSouth(boolean b) {
 		Platform.runLater(new Runnable() {
       @Override
@@ -179,6 +217,10 @@ public class GameScreen extends Screen{
     });
 	}
 	
+	/**
+	 * Disables/Enables moving east
+	 * @param b - whether or not direction is valid
+	 */
 	public void setEast(boolean b) {
 		Platform.runLater(new Runnable() {
       @Override
@@ -188,6 +230,10 @@ public class GameScreen extends Screen{
     });
 	}
 	
+	/**
+	 * Disables/Enables moving west
+	 * @param b - whether or not direction is valid
+	 */
 	public void setWest(boolean b) {
 		Platform.runLater(new Runnable() {
       @Override
@@ -197,6 +243,10 @@ public class GameScreen extends Screen{
     });
 	}
 	
+	/**
+	 * Disables/Enables moving up
+	 * @param b - whether or not direction is valid
+	 */
 	public void setUp(boolean b) {
 		Platform.runLater(new Runnable() {
       @Override
@@ -206,6 +256,10 @@ public class GameScreen extends Screen{
     });
 	}
 	
+	/**
+	 * Disables/Enables moving down
+	 * @param b - whether or not direction is valid
+	 */
 	public void setDown(boolean b) {
 		Platform.runLater(new Runnable() {
       @Override

@@ -7,14 +7,25 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.net.SocketException;
 
+/**
+ * This class represents the server side thread which sends data to the client
+ * @author Gia-Phong Nguyen
+ *
+ */
 public class ServerSideClientThread extends Thread{
-	private Socket socket;
-	private Server server;
-	private int id;
+	private Socket socket; // socket which sends to client
+	private Server server; // server
+	private int id; // id of the client
 	
-	private BufferedReader sIn2;
-	private PrintStream tOut;
+	private BufferedReader sIn2; // reader for data from client
+	private PrintStream tOut; // out stream to client reciever
 
+	/**
+	 * Constructor for server side thread
+	 * @param socket - socket connecting to client
+	 * @param server
+	 * @param id - id of client
+	 */
 	public ServerSideClientThread(Socket socket, Server server, int id) {
 		this.socket = socket;
 		this.server = server;
@@ -30,7 +41,7 @@ public class ServerSideClientThread extends Thread{
 
 	public void run() {
 		try {
-			while(true) {
+			while(true) { // continously checks for new messages
 				try {
 					String message = sIn2.readLine();
 					server.interpretMessage(message);
@@ -38,7 +49,7 @@ public class ServerSideClientThread extends Thread{
 					throw new NullPointerException();
 				}
 			}
-		} catch( NullPointerException e) {
+		} catch( NullPointerException e) { // when sockets closes
 			server.removeUser(id);
 			if(id==0) {
 				server.endServer();
@@ -48,10 +59,18 @@ public class ServerSideClientThread extends Thread{
 		} 
 	}
 	
+	/**
+	 * Sends a message to the client
+	 * @param message
+	 */
 	protected void sendToClient(String message) {
 		tOut.println(message);
 	}
 	
+	/**
+	 * Gets the socket
+	 * @return socket
+	 */
 	public Socket getSocket() {
 		return socket;
 	}

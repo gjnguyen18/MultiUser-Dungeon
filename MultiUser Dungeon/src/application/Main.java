@@ -6,11 +6,17 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
+/**
+ * This class is where the application is launched from, the main
+ * @author Gia-Phong Nguyen
+ *
+ */
 public class Main extends Application {
 	Client client;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			// sets up screen
 			Pane pane = new Pane();
 			pane.setPrefSize(Driver.screenWidth,Driver.screenHeight);
 			pane.setId("background");
@@ -23,6 +29,7 @@ public class Main extends Application {
 			primaryStage.setTitle("MultiUser Dungeon");
 			primaryStage.setResizable(false);
 			
+			// sets up and starts the program
 			client = new Client();
 			Driver driver = new Driver(root, client);
 			driver.start();
@@ -36,6 +43,9 @@ public class Main extends Application {
 		launch(args);
 	}
 	
+	/**
+	 * Makes sure to properly disconnect from server on exiting
+	 */
 	@Override
 	public void stop(){
     client.disconnect(false);

@@ -12,10 +12,13 @@ import javafx.scene.Node;
  */
 public class Screen {
 
-//	private ArrayList<Node> elements;
-	private Group group;
-	private Group root;
+	private Group group; // this screen's group of elements
+	private Group root; // root all gui
 
+	/**
+	 * Constructor for screen
+	 * @param root - group of all elements
+	 */
 	public Screen(Group root) {
 		group = new Group();
 		this.root = root;
@@ -36,18 +39,33 @@ public class Screen {
 		group.setVisible(false);
 	}
 	
+	/**
+	 * Gets the root of the group
+	 * @return the root
+	 */
 	protected Group getRoot() {
 		return root;
 	}
 
+	/**
+	 * Adds element to the screen
+	 * @param n - node to be added
+	 */
 	public void addElement(Node n) {
 		group.getChildren().add(n);
 	}
 
+	/**
+	 * Removes element from the screen
+	 * @param n - node to remove
+	 */
 	public void removeElement(Node n) {
 		group.getChildren().remove(n);
 	}
 	
+	/**
+	 * Deletes this screen
+	 */
 	public void deleteScreen() {
 		root.getChildren().remove(group);
 		group = null;

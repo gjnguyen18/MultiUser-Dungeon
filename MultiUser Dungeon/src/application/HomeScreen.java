@@ -4,8 +4,15 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+/**
+ * The class represents the home screen, which is the first thing that shows up when the program is
+ * launched
+ * @author Gia-Phong Nguyen
+ *
+ */
 public class HomeScreen extends Screen{
 	
+	// gui
 	private Label title;
 	private Button start;
 
@@ -14,6 +21,9 @@ public class HomeScreen extends Screen{
 		setupGUI();
 	}
 
+	/**
+	 * Sets up the gui, done after the setup screen has been set up
+	 */
 	private void setupGUI() {
 		// sets up title label
 		title = new Label("MultiUser Dungeon");
@@ -26,6 +36,10 @@ public class HomeScreen extends Screen{
 		Driver.addCenterNode(start, this, 0, 300, Driver.screenWidth, 200);
 	}
 	
+	/**
+	 * Sets up the setup screen
+	 * @param screen - setup screen
+	 */
 	public void setupStartButton(Screen screen) {
 		start.setOnAction(e -> {
 				this.hide();

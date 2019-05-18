@@ -1,14 +1,28 @@
 package application;
 
-
+/**
+ * This class contains utility methods for handling links
+ * @author Gia-Phong Nguyen
+ *
+ */
 public class LinkEncoders {
 
-	private static int shift = 5;
+	private static int shift = 5; // key shift in encoding
 	
+	/**
+	 * Keys to be for encoding
+	 * @return keys
+	 */
 	private static String getKeys() {
 		return "LZs1wui5xcvlzD4AS6WbnmQ23dfgP789qFGertyHJ0opaKTYUhjkCVEBXRIONM";
 	}
 	
+	/**
+	 * Converts ip and port into a link
+	 * @param ip
+	 * @param port
+	 * @return link
+	 */
 	public static String convertToLink(String ip, int port) {
 		String s = "";
 		String splitIp[] = ip.split("\\.");
@@ -45,6 +59,11 @@ public class LinkEncoders {
 		return s;
 	}
 	
+	/**
+	 * Converts a link into an ip and port
+	 * @param code - link to be decoded
+	 * @return array with the ip and port
+	 */
 	public static String[] decodeLink(String code) {
 		String[] data = new String[2];
 		String codedIp = code.substring(0, 8);

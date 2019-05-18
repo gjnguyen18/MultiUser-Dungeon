@@ -4,6 +4,11 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * This class represents the driver which sets everything up and puts it together
+ * @author Gia-Phong Nguyen
+ *
+ */
 public class Driver {
 	
 	public static int screenWidth = 800;
@@ -15,6 +20,11 @@ public class Driver {
 	
 	private Client client;
 	
+	/**
+	 * Initializes everything
+	 * @param root - where all gui elements are added to
+	 * @param client
+	 */
 	public Driver(Group root, Client client) {
 		this.client = client;
 		homeScreen = new HomeScreen(root);
@@ -28,6 +38,15 @@ public class Driver {
 		homeScreen.show();
 	}
 	
+	/**
+	 * Utility method for centering an gui element at a desired location
+	 * @param label - item to be centered
+	 * @param screen - screen the item belongs to
+	 * @param x - x position
+	 * @param y - y position
+	 * @param w - width
+	 * @param h - height
+	 */
 	public static void addCenterNode(Node label, Screen screen, int x, int y, int w, int h) {
 		BorderPane labelBox = new BorderPane(label);
 		labelBox.setPrefSize(w, h);

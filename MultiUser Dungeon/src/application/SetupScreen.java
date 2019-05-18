@@ -12,17 +12,31 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 
+/**
+ * This class represents the setup screen
+ * This is where users can either create/join a dungeon as well as enter in their username
+ * @author Gia-Phong Nguyen
+ *
+ */
 public class SetupScreen extends Screen{
 	
-	private Screen homeScreen;
-	private GameScreen gameScreen;
+	private Screen homeScreen; // home screen
+	private GameScreen gameScreen; // game screen
 	
+	// gui elements
 	private Label title;
 	private TextField linkField, nameField;
 	private Button back, start;
 	
-	private Client client;
+	private Client client; // client of user
 
+	/**
+	 * Constructor of setup screen
+	 * @param root - where gui elements are added to
+	 * @param client - user client
+	 * @param back - home screen
+	 * @param game - game screen
+	 */
 	public SetupScreen(Group root, Client client, Screen back, GameScreen game) {
 		super(root);
 		this.client = client;
@@ -32,6 +46,9 @@ public class SetupScreen extends Screen{
 		this.hide();
 	}
 
+	/**
+	 * Sets up the gui for the screen
+	 */
 	private void setupGUI() {
 		// sets up title label
 		title = new Label("Join/Create Dungeon");
@@ -90,6 +107,10 @@ public class SetupScreen extends Screen{
 		});
 	}
 	
+	/**
+	 * Takes current text fields and sets up the client with their data
+	 * @return true of client is setup succesfully
+	 */
 	public boolean setupClient() {
 		String link = linkField.getText();
 		if(nameField.getText().trim().equals("") || nameField.getText().trim().split(" ").length>1) {
@@ -107,6 +128,9 @@ public class SetupScreen extends Screen{
 		return false;
 	}
 	
+	/**
+	 * Show also resets the text fields of the screen
+	 */
 	@Override
 	public void show() {
 		super.show();
